@@ -14,21 +14,9 @@
  * limitations under the License.
  */
 
-@file:Suppress("UnstableApiUsage")
+package com.example.inventory.data
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "Inventory"
-include(":app")
+/**
+ * Repository that provides insert, update, delete, and retrieve of [Item] from a given data source.
+ */
+interface ItemsRepository

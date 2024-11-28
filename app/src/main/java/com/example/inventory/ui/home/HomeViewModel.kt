@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-@file:Suppress("UnstableApiUsage")
+package com.example.inventory.ui.home
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
+import androidx.lifecycle.ViewModel
+import com.example.inventory.data.Item
+
+/**
+ * ViewModel to retrieve all items in the Room database.
+ */
+class HomeViewModel : ViewModel() {
+    companion object {
+        private const val TIMEOUT_MILLIS = 5_000L
     }
 }
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "Inventory"
-include(":app")
+
+/**
+ * Ui State for HomeScreen
+ */
+data class HomeUiState(val itemList: List<Item> = listOf())

@@ -14,21 +14,15 @@
  * limitations under the License.
  */
 
-@file:Suppress("UnstableApiUsage")
+package com.example.inventory.data
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-rootProject.name = "Inventory"
-include(":app")
+
+/**
+ * Entity data class represents a single row in the database.
+ */
+class Item(
+    val id: Int = 0,
+    val name: String,
+    val price: Double,
+    val quantity: Int
+)
