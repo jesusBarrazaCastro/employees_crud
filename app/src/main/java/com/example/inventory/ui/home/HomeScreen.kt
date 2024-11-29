@@ -75,7 +75,7 @@ fun HomeScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             InventoryTopAppBar(
-                title = stringResource(HomeDestination.titleRes),
+                title = "Employees",
                 canNavigateBack = false,
                 scrollBehavior = scrollBehavior
             )
@@ -115,7 +115,7 @@ private fun HomeBody(
     ) {
         if (itemList.isEmpty()) {
             Text(
-                text = stringResource(R.string.no_item_description),
+                text = "No emloyees found",
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(contentPadding),
@@ -167,19 +167,19 @@ private fun InventoryItem(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = item.name,
+                    text = "${item.firstName} ${item.lastname}",
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
-                Text(
-                    text = item.formatedPrice(),
-                    style = MaterialTheme.typography.titleMedium
-                )
+                //Text(
+                //    text = item.formatedPrice(),
+                //    style = MaterialTheme.typography.titleMedium
+                //)
             }
-            Text(
-                text = stringResource(R.string.in_stock, item.quantity),
-                style = MaterialTheme.typography.titleMedium
-            )
+            //Text(
+            //    text = stringResource(R.string.in_stock, item.quantity),
+            //    style = MaterialTheme.typography.titleMedium
+            //)
         }
     }
 }
@@ -189,7 +189,9 @@ private fun InventoryItem(
 fun HomeBodyPreview() {
     InventoryTheme {
         HomeBody(listOf(
-            Item(1, "Game", 100.0, 20), Item(2, "Pen", 200.0, 30), Item(3, "TV", 300.0, 50)
+            Item(1, "Jesus", "Barraza", "Fullstack developer", 10000.00, 2),
+            Item(2, "Pedro", "Lopez","Tester", 8000.00, 1),
+            Item(3, "Mario", "Alvarez", "Analyst", 12000.00, 3)
         ), onItemClick = {})
     }
 }
@@ -207,7 +209,7 @@ fun HomeBodyEmptyListPreview() {
 fun InventoryItemPreview() {
     InventoryTheme {
         InventoryItem(
-            Item(1, "Game", 100.0, 20),
+            Item(1, "Jesus", "Barraza", "Fullstack developer", 10000.00, 2)
         )
     }
 }

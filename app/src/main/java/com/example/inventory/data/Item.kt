@@ -22,7 +22,9 @@ package com.example.inventory.data
  */
 class Item(
     val id: Int = 0,
-    val name: String,
-    val price: Double,
-    val quantity: Int
+    val firstName: String,
+    val lastname: String,
+    val position: String,
+    val salary: Double,
+    val yearsOfExperience: Int
 )

@@ -173,22 +173,36 @@ fun ItemDetails(
             )
         ) {
             ItemDetailsRow(
-                labelResID = R.string.item,
-                itemDetail = item.name,
+                labelResID = R.string.first_name,
+                itemDetail = item.firstName,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.padding_medium)
                 )
             )
             ItemDetailsRow(
-                labelResID = R.string.quantity_in_stock,
-                itemDetail = item.quantity.toString(),
+                labelResID = R.string.last_name,
+                itemDetail = item.lastname,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.padding_medium)
                 )
             )
             ItemDetailsRow(
-                labelResID = R.string.price,
-                itemDetail = item.formatedPrice(),
+                labelResID = R.string.position,
+                itemDetail = item.position,
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = R.dimen.padding_medium)
+                )
+            )
+            ItemDetailsRow(
+                labelResID = R.string.salary,
+                itemDetail = item.salary.toString(),
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(id = R.dimen.padding_medium)
+                )
+            )
+            ItemDetailsRow(
+                labelResID = R.string.years_of_experience,
+                itemDetail = item.yearsOfExperience.toString(),
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.padding_medium)
                 )
