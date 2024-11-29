@@ -39,17 +39,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.inventory.InventoryTopAppBar
 import com.example.inventory.R
 import com.example.inventory.data.Item
+import com.example.inventory.ui.AppViewModelProvider
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 
@@ -66,9 +73,11 @@ object HomeDestination : NavigationDestination {
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
     navigateToItemUpdate: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val homeUiState by viewModel.homeUiState.collectAsState()
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -93,7 +102,7 @@ fun HomeScreen(
         },
     ) { innerPadding ->
         HomeBody(
-            itemList = listOf(),
+            itemList = homeUiState.itemList,
             onItemClick = navigateToItemUpdate,
             modifier = modifier.fillMaxSize(),
             contentPadding = innerPadding,
@@ -158,27 +167,43 @@ private fun InventoryItem(
         modifier = modifier,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 15.dp, horizontal = 20.dp),
+            horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth()
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
                     text = "${item.firstName} ${item.lastName}",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = TextStyle(fontSize = 26.sp, fontWeight = FontWeight.Bold),
                 )
-                Spacer(Modifier.weight(1f))
-                //Text(
-                //    text = item.formatedPrice(),
-                //    style = MaterialTheme.typography.titleMedium
-                //)
+                Text(
+                    text = item.position,
+                    style = MaterialTheme.typography.titleMedium
+                )
             }
-            //Text(
-            //    text = stringResource(R.string.in_stock, item.quantity),
-            //    style = MaterialTheme.typography.titleMedium
-            //)
+            Spacer(Modifier.weight(1f))
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = "Salary",
+                    style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold),
+                )
+                Text(
+                    text = "$${item.salary}",
+                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Normal),
+                )
+                Text(
+                    text = "Experience",
+                    style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold),
+                )
+                Text(
+                    text = "${item.yearsOfExperience} years",
+                    style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Normal),
+                )
+            }
         }
     }
 }

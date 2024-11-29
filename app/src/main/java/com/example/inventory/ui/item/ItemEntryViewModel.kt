@@ -16,6 +16,7 @@
 
 package com.example.inventory.ui.item
 
+import ItemsRepository
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -26,7 +27,7 @@ import java.text.NumberFormat
 /**
  * ViewModel to validate and insert items in the Room database.
  */
-class ItemEntryViewModel : ViewModel() {
+class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewModel() {
 
     /**
      * Holds current item ui state
@@ -46,6 +47,12 @@ class ItemEntryViewModel : ViewModel() {
     private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
         return with(uiState) {
             firstName.isNotBlank() && lastName.isNotBlank() && position.isNotBlank()
+        }
+    }
+
+    suspend fun saveItem() {
+        if (validateInput()) {
+            itemsRepository.insertItem(itemUiState.itemDetails.toItem())
         }
     }
 }
@@ -77,8 +84,8 @@ fun ItemDetails.toItem(): Item = Item(
     firstName = firstName,
     lastName = lastName,
     position = position,
-    salary = salary ?: 0.0,
-    yearsOfExperience = yearsOfExperience ?: 0
+    salary = salary.toDouble(),
+    yearsOfExperience = yearsOfExperience.toInt()
 )
 
 fun Item.formatedSalary(): String {
