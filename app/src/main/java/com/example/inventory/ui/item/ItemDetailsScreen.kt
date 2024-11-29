@@ -181,7 +181,7 @@ fun ItemDetails(
             )
             ItemDetailsRow(
                 labelResID = R.string.last_name,
-                itemDetail = item.lastname,
+                itemDetail = item.lastName,
                 modifier = Modifier.padding(
                     horizontal = dimensionResource(id = R.dimen.padding_medium)
                 )

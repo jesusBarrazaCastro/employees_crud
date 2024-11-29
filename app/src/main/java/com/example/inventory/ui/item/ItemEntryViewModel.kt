@@ -45,7 +45,7 @@ class ItemEntryViewModel : ViewModel() {
 
     private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
         return with(uiState) {
-            name.isNotBlank() && price.isNotBlank() && quantity.isNotBlank()
+            firstName.isNotBlank() && lastName.isNotBlank() && position.isNotBlank()
         }
     }
 }
@@ -60,9 +60,11 @@ data class ItemUiState(
 
 data class ItemDetails(
     val id: Int = 0,
-    val name: String = "",
-    val price: String = "",
-    val quantity: String = "",
+    val firstName: String = "",
+    val lastName: String = "",
+    val position: String = "",
+    val salary: String = "",
+    val yearsOfExperience: String = "",
 )
 
 /**
@@ -72,13 +74,15 @@ data class ItemDetails(
  */
 fun ItemDetails.toItem(): Item = Item(
     id = id,
-    name = name,
-    price = price.toDoubleOrNull() ?: 0.0,
-    quantity = quantity.toIntOrNull() ?: 0
+    firstName = firstName,
+    lastName = lastName,
+    position = position,
+    salary = salary ?: 0.0,
+    yearsOfExperience = yearsOfExperience ?: 0
 )
 
-fun Item.formatedPrice(): String {
-    return NumberFormat.getCurrencyInstance().format(price)
+fun Item.formatedSalary(): String {
+    return NumberFormat.getCurrencyInstance().format(salary)
 }
 
 /**
@@ -94,7 +98,9 @@ fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState
  */
 fun Item.toItemDetails(): ItemDetails = ItemDetails(
     id = id,
-    name = name,
-    price = price.toString(),
-    quantity = quantity.toString()
+    firstName = firstName,
+    lastName = lastName,
+    position = position,
+    salary = salary.toString(),
+    yearsOfExperience = yearsOfExperience.toString()
 )

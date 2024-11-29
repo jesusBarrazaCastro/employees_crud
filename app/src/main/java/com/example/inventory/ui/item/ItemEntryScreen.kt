@@ -125,9 +125,9 @@ fun ItemInputForm(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
         OutlinedTextField(
-            value = itemDetails.name,
-            onValueChange = { onValueChange(itemDetails.copy(name = it)) },
-            label = { Text(stringResource(R.string.item_name_req)) },
+            value = itemDetails.firstName,
+            onValueChange = { onValueChange(itemDetails.copy(firstName = it)) },
+            label = { Text(stringResource(R.string.first_name)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -138,10 +138,36 @@ fun ItemInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = itemDetails.price,
-            onValueChange = { onValueChange(itemDetails.copy(price = it)) },
+            value = itemDetails.lastName,
+            onValueChange = { onValueChange(itemDetails.copy(lastName = it)) },
+            label = { Text(stringResource(R.string.last_name)) },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
+        OutlinedTextField(
+            value = itemDetails.position,
+            onValueChange = { onValueChange(itemDetails.copy(position = it)) },
+            label = { Text(stringResource(R.string.position)) },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            ),
+            modifier = Modifier.fillMaxWidth(),
+            enabled = enabled,
+            singleLine = true
+        )
+        OutlinedTextField(
+            value = itemDetails.salary,
+            onValueChange = { onValueChange(itemDetails.copy(salary = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-            label = { Text(stringResource(R.string.item_price_req)) },
+            label = { Text(stringResource(R.string.salary)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -153,10 +179,10 @@ fun ItemInputForm(
             singleLine = true
         )
         OutlinedTextField(
-            value = itemDetails.quantity,
-            onValueChange = { onValueChange(itemDetails.copy(quantity = it)) },
+            value = itemDetails.yearsOfExperience,
+            onValueChange = { onValueChange(itemDetails.copy(yearsOfExperience = it)) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            label = { Text(stringResource(R.string.quantity_req)) },
+            label = { Text(stringResource(R.string.years_of_experience)) },
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -181,7 +207,7 @@ private fun ItemEntryScreenPreview() {
     InventoryTheme {
         ItemEntryBody(itemUiState = ItemUiState(
             ItemDetails(
-                name = "Item name", price = "10.00", quantity = "5"
+                firstName = "First name", lastName = "Last name", position = "Position", salary = "Salary", yearsOfExperience = "Years of experience"
             )
         ), onItemValueChange = {}, onSaveClick = {})
     }

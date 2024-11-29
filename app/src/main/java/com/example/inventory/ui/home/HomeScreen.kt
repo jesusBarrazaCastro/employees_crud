@@ -50,7 +50,6 @@ import androidx.compose.ui.unit.dp
 import com.example.inventory.InventoryTopAppBar
 import com.example.inventory.R
 import com.example.inventory.data.Item
-import com.example.inventory.ui.item.formatedPrice
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 
@@ -167,7 +166,7 @@ private fun InventoryItem(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = "${item.firstName} ${item.lastname}",
+                    text = "${item.firstName} ${item.lastName}",
                     style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))

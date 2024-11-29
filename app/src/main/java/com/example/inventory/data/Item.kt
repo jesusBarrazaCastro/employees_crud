@@ -23,8 +23,8 @@ package com.example.inventory.data
 class Item(
     val id: Int = 0,
     val firstName: String,
-    val lastname: String,
+    val lastName: String,
     val position: String,
-    val salary: Double,
-    val yearsOfExperience: Int
+    val salary: Comparable<*>,
+    val yearsOfExperience: Comparable<*>
 )
