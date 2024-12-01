@@ -57,6 +57,7 @@ import com.example.inventory.InventoryTopAppBar
 import com.example.inventory.R
 import com.example.inventory.data.Item
 import com.example.inventory.ui.AppViewModelProvider
+import com.example.inventory.ui.item.formatedSalary
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.InventoryTheme
 
@@ -192,7 +193,7 @@ private fun InventoryItem(
                     style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold),
                 )
                 Text(
-                    text = "$${item.salary}",
+                    text = item.formatedSalary(),
                     style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Normal),
                 )
                 Text(

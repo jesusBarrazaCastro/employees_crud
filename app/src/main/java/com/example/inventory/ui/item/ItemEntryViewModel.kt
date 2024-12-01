@@ -84,8 +84,8 @@ fun ItemDetails.toItem(): Item = Item(
     firstName = firstName,
     lastName = lastName,
     position = position,
-    salary = salary.toDouble(),
-    yearsOfExperience = yearsOfExperience.toInt()
+    salary = salary.toDoubleOrNull() ?: 0.00,
+    yearsOfExperience = yearsOfExperience.toIntOrNull() ?: 0
 )
 
 fun Item.formatedSalary(): String {
