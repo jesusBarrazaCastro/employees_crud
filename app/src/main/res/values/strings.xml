@@ -28,7 +28,7 @@
     <string name="salary">Salary</string>
     <string name="years_of_experience">Years of experience</string>
     <string name="item_detail_title">Employee Details</string>
-    <string name="item_entry_title">Add Item</string>
+    <string name="item_entry_title">Add Employee</string>
     <string name="item_name_req">Item Name*</string>
     <string name="item_price_req">Item Price*</string>
     <string name="no">No</string>
