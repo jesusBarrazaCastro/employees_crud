@@ -1,29 +1,13 @@
-Inventory app
+CRUD de Empleados
 ==================================
 
-Solution code for Android Basics with Compose.
+Trabajo 5 - Desarrollo de aplicaciones para dispositivos moviles
 
-Introduction
+Jesus Alberto Barraza Castro
+
+Descripcion
 ------------
 
-This app is an Inventory tracking app. Demos how to add, update, sell, and delete items from the local database.
-This app demonstrated the use of Android Jetpack component [Room](https://developer.android.com/training/data-storage/room) database.
-The app also leverages [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel),
-[Flow](https://developer.android.com/kotlin/flow),
-and [Navigation](https://developer.android.com/topic/libraries/architecture/navigation/).
+Esta aplicación es un sistema de gestión de empleados que permite realizar operaciones básicas de un CRUD (Crear, Leer, Actualizar y Eliminar) sobre la información de los empleados. Los usuarios pueden administrar datos clave como nombres, apellidos, posición, salario y años de experiencia.
 
-Pre-requisites
---------------
-
-You need to know:
-- How to create and use composables.
-- How to navigate between composables, and pass data between them.
-- How to use architecture components including ViewModel, Flow, StateFlow and StateUi.
-- How to use coroutines for long-running tasks.
-- SQLite database and the SQLite query language
-
-
-Getting Started
----------------
-
-1. Download and run the app.
+La interfaz está desarrollada con Jetpack Compose y utiliza arquitectura basada en ViewModel para manejar el estado y la lógica. Ideal para empresas que buscan una solución simple y efectiva para organizar su información de empleados.
