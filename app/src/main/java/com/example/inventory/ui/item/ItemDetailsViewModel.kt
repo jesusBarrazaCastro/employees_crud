@@ -15,16 +15,21 @@
  */
 
 package com.example.inventory.ui.item
+import retrofit2.Response
 
 import ItemsRepository
+import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 /**
  * ViewModel to retrieve, update and delete an item from the [ItemsRepository]'s data source.
@@ -36,19 +41,35 @@ class ItemDetailsViewModel(
 
     private val itemId: Int = checkNotNull(savedStateHandle[ItemDetailsDestination.itemIdArg])
 
-    val uiState: StateFlow<ItemDetailsUiState> =
-        itemsRepository.getItemStream(itemId)
-            .filterNotNull()
-            .map {
-                ItemDetailsUiState(itemDetails = it.toItemDetails())
-            }.stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-                initialValue = ItemDetailsUiState()
-            )
+    // Define a MutableStateFlow to hold the UI state
+    private val _uiState = MutableStateFlow(ItemDetailsUiState())
+    val uiState: StateFlow<ItemDetailsUiState> = _uiState.asStateFlow()
+
+    init {
+        // Launch a coroutine to collect the item details stream
+        viewModelScope.launch {
+            itemsRepository.getItemStream(itemId)
+                //.filterNotNull()
+                .collect { item ->
+                    if (item != null) {
+                        _uiState.value = ItemDetailsUiState(itemDetails = item.toItemDetails())
+                    }
+                }
+        }
+    }
 
     suspend fun deleteItem() {
-        itemsRepository.deleteItem(uiState.value.itemDetails.toItem())
+        try {
+            val response = itemsRepository.deleteItem(uiState.value.itemDetails.id)
+            if (response.isSuccessful) {
+                // Handle successful deletion
+            } else {
+                // Handle error, possibly show a message
+            }
+        } catch (e: Exception) {
+            // Handle unexpected errors
+            Log.e("DeleteItem", "Error deleting item", e)
+        }
     }
 
     companion object {

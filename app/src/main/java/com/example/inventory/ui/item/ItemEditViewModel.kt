@@ -17,6 +17,7 @@
 package com.example.inventory.ui.item
 
 import ItemsRepository
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -64,8 +65,19 @@ class ItemEditViewModel(
     }
 
     suspend fun updateItem() {
-        if (validateInput(itemUiState.itemDetails)) {
-            itemsRepository.updateItem(itemUiState.itemDetails.toItem())
+        try {
+            if (validateInput(itemUiState.itemDetails)) {
+                val response = itemsRepository.updateItem(itemUiState.itemDetails.id, itemUiState.itemDetails.toItem())
+                if (response.isSuccessful) {
+                    // Handle successful update, e.g., show a success message
+                } else {
+                    // Handle error, possibly show a message indicating the update failed
+                }
+            }
+        } catch (e: Exception) {
+            // Handle unexpected errors
+            Log.e("UpdateItem", "Error updating item", e)
         }
     }
+
 }
